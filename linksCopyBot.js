@@ -37,19 +37,19 @@ client.on('message', message => {
          type: "WATCHING"
       }
    });
-	if(message.channel.id === sourceID){
+	if(message.channel.id === sourceID && !message.author.bot){
 		let storedMessage = message.content;
 		let author = message.guild.members.cache.get(message.author.id).displayName;
 		storedMessage += ` *- from ${author}*`;
-		message.delete().catch(error=>{console.log('failed to delete message, maybe no permissions?')});
-		client.channels.cache.get(destinationID).send(storedMessage).catch(error=>{console.log('couldnt write to destination, maybe no permissions?')});
+		message.delete().catch(error=>{message.channel.send('failed to delete message, maybe no permissions?')});
+		client.channels.cache.get(destinationID).send(storedMessage).catch(error=>{message.channel.send('couldnt write to destination, maybe no permissions?')});
 	}
-	else if(message.channel.id === '835937372042297374'){
+	else if(message.channel.id === '835937372042297374' && !message.author.bot){
 		let storedMessage = message.content;
 		let author = message.guild.members.cache.get(message.author.id).displayName;
 		storedMessage += ` *- from ${author}*`;
-		message.delete().catch(error=>{console.log('failed to delete message, maybe no permissions?')});
-		client.channels.cache.get('835937429885550662').send(storedMessage).catch(error=>{console.log('couldnt write to destination, maybe no permissions?')});
+		message.delete().catch(error=>{message.channel.send('failed to delete message, maybe no permissions?')});
+		client.channels.cache.get('835937429885550662').send(storedMessage).catch(error=>{message.channel.send('couldnt write to destination, maybe no permissions?')});
 	}
 });
 // Log our bot in using the token from https://discord.com/developers/applications
